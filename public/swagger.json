@@ -1,0 +1,439 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Warehouse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"lat": {
+						"type": "number",
+						"format": "double"
+					},
+					"long": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"lat",
+					"long"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateWarehouseRequest": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"lat": {
+						"type": "number",
+						"format": "double"
+					},
+					"long": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"lat",
+					"long"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IRoute": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"route": {
+						"items": {
+							"items": {
+								"type": "number",
+								"format": "double"
+							},
+							"type": "array"
+						},
+						"type": "array"
+					},
+					"distance": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"id",
+					"route",
+					"distance"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DeliveryRequest": {
+				"properties": {
+					"delivery_ids": {
+						"items": {
+							"type": "number",
+							"format": "double"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"delivery_ids"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Product": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"warehouses": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"warehouses"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateProductRequest": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"warehouseIds": {
+						"items": {
+							"type": "number",
+							"format": "double"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"name",
+					"warehouseIds"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Delivery": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"lat": {
+						"type": "number",
+						"format": "double"
+					},
+					"long": {
+						"type": "number",
+						"format": "double"
+					},
+					"deliveryDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"productsIds": {
+						"items": {
+							"type": "number",
+							"format": "double"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"lat",
+					"long",
+					"deliveryDate",
+					"productsIds"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateDeliveryRequest": {
+				"properties": {
+					"productIds": {
+						"items": {
+							"type": "number",
+							"format": "double"
+						},
+						"type": "array"
+					},
+					"lat": {
+						"type": "number",
+						"format": "double"
+					},
+					"long": {
+						"type": "number",
+						"format": "double"
+					},
+					"deliveryDate": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"productIds",
+					"lat",
+					"long",
+					"deliveryDate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "prueba-minery-express-typescript",
+		"version": "1.0.0",
+		"contact": {}
+	},
+	"paths": {
+		"/warehouses": {
+			"post": {
+				"operationId": "CreateWarehouse",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Warehouse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Unable to create warehouse"
+					}
+				},
+				"tags": [
+					"Warehouses"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateWarehouseRequest"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetWarehouses",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Warehouse"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Warehouses"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/routes": {
+			"post": {
+				"operationId": "CreateRoute",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IRoute"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Error creating route"
+					}
+				},
+				"tags": [
+					"Routes"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeliveryRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/products": {
+			"post": {
+				"operationId": "CreateProduct",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Product"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Unable to create product"
+					}
+				},
+				"tags": [
+					"Products"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateProductRequest"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetProducts",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Product"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Products"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/deliveries": {
+			"post": {
+				"operationId": "CreateDelivery",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Delivery"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Unable to create delivery"
+					}
+				},
+				"tags": [
+					"Deliveries"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateDeliveryRequest"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetDeliveries",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Delivery"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Deliveries"
+				],
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
