@@ -1,0 +1,61 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+model Warehouse {
+  id        Int      @id @default(autoincrement())
+  name      String
+  lat      Float
+  long      Float
+  products  Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  name      String
+  warehouses Warehouse[]
+  deliveries Delivery[]
+}
+
+model Delivery {
+  id        Int      @id @default(autoincrement())
+  lat      Float
+  long      Float
+  deliveryDate DateTime
+  products Product[]
+  route    Route?    @relation(fields: [routeId], references: [id])
+  routeId  Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Waypoints {
+  id       Int      @id @default(autoincrement())
+  lat      Float
+  long      Float
+  route    Route    @relation(fields: [routeId], references: [id])
+  routeId  Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Route {
+  id       Int      @id @default(autoincrement())
+  distance Float
+  waypoints Waypoints[]
+  deliveries Delivery[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
