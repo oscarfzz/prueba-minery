@@ -1,19 +1,22 @@
 import express from "express";
-import * as path from "path";
 
 import { errorHandler, errorNotFoundHandler } from "./middlewares/errorHandler";
 
 // Routes
 import { index } from "./routes/index";
+import { router as productRouter } from "./routes/product.router";
+import { router as warehouseRouter } from "./routes/warehouse.router";
+import { router as deliveryRouter } from "./routes/delivery.router";
+
 // Create Express server
 export const app = express();
 
 // Express configuration
-app.set("port", process.env.PORT || 3000);
-app.set("views", path.join(__dirname, "../views"));
-
-app.use(express.static(path.join(__dirname, "../public")));
+app.set("port", 3000);
 app.use("/", index);
+app.use("/product", productRouter);
+app.use("/warehouse", warehouseRouter);
+app.use("/delivery", deliveryRouter);
 
 app.use(errorNotFoundHandler);
 app.use(errorHandler);
