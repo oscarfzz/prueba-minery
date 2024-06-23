@@ -8,10 +8,6 @@ import express, {
 import { errorHandler, errorNotFoundHandler } from "./middlewares/errorHandler";
 import swaggerUi from "swagger-ui-express";
 
-import { router as productRouter } from "./routes/product.router";
-import { router as warehouseRouter } from "./routes/warehouse.router";
-import { router as deliveryRouter } from "./routes/delivery.router";
-import { router as routeRoter } from "./routes/route.router";
 import { RegisterRoutes } from "./routes/routes";
 
 export const app = express();

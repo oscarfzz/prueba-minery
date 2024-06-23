@@ -58,10 +58,6 @@
 			},
 			"IRoute": {
 				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
 					"route": {
 						"items": {
 							"items": {
@@ -78,7 +74,6 @@
 					}
 				},
 				"required": [
-					"id",
 					"route",
 					"distance"
 				],
@@ -283,8 +278,8 @@
 			"post": {
 				"operationId": "CreateRoute",
 				"responses": {
-					"200": {
-						"description": "OK",
+					"201": {
+						"description": "Created",
 						"content": {
 							"application/json": {
 								"schema": {

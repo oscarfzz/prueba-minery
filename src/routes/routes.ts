@@ -5,7 +5,7 @@ import { TsoaRoute, fetchMiddlewares, ExpressTemplateService } from '@tsoa/runti
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { WarehouseController } from './../controllers/warehouse.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { RouteController } from './../controllers/route.controller';
+import { RoutesController } from './../controllers/route.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ProductsController } from './../controllers/product.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -41,7 +41,6 @@ const models: TsoaRoute.Models = {
     "IRoute": {
         "dataType": "refObject",
         "properties": {
-            "id": {"dataType":"double","required":true},
             "route": {"dataType":"array","array":{"dataType":"array","array":{"dataType":"double"}},"required":true},
             "distance": {"dataType":"double","required":true},
         },
@@ -168,10 +167,10 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/routes',
-            ...(fetchMiddlewares<RequestHandler>(RouteController)),
-            ...(fetchMiddlewares<RequestHandler>(RouteController.prototype.createRoute)),
+            ...(fetchMiddlewares<RequestHandler>(RoutesController)),
+            ...(fetchMiddlewares<RequestHandler>(RoutesController.prototype.createRoute)),
 
-            async function RouteController_createRoute(request: ExRequest, response: ExResponse, next: any) {
+            async function RoutesController_createRoute(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     requestBody: {"in":"body","name":"requestBody","required":true,"ref":"DeliveryRequest"},
             };
@@ -182,7 +181,7 @@ export function RegisterRoutes(app: Router) {
             try {
                 validatedArgs = templateService.getValidatedArgs({ args, request, response });
 
-                const controller = new RouteController();
+                const controller = new RoutesController();
 
               await templateService.apiHandler({
                 methodName: 'createRoute',
@@ -190,7 +189,7 @@ export function RegisterRoutes(app: Router) {
                 response,
                 next,
                 validatedArgs,
-                successStatus: 200,
+                successStatus: 201,
               });
             } catch (err) {
                 return next(err);
