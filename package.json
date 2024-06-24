@@ -4,7 +4,7 @@
     "engines": {
         "node": ">=20.12.0"
     },
-    "packageManager": "pnpm@9.12.0",
+    "packageManager": "pnpm@9.1.0",
     "scripts": {
         "start": "pnpm serve",
         "build": "pnpm tsc",
@@ -20,9 +20,11 @@
     },
     "dependencies": {
         "@prisma/client": "^5.15.1",
+        "@tsoa/runtime": "^6.3.0",
         "express": "^4.19.2",
         "haversine-distance": "^1.2.3",
         "http-errors": "^1.7.1",
+        "joi": "^17.13.3",
         "swagger-ui-express": "^5.0.1",
         "tsoa": "^6.3.1"
     },

@@ -207,7 +207,7 @@ export class RoutesController extends Controller {
 
             return {
                 route,
-                distance: totalDistance,
+                distance: totalDistance / 1000,
             };
         } catch (error) {
             console.error("Failed to create route:", error);
